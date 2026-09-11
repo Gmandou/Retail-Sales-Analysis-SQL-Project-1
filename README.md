@@ -14,6 +14,17 @@ This project uses SQL to explore, clean, and analyze a retail sales dataset. It 
 3. **Explore the data**: get a basic sense of row count, unique customers, and product categories.
 4. **Answer business questions**: use SQL — including JOINs, CTEs, and window functions to pull out patterns in revenue, profit, and customer behavior.
 
+## Skills Used
+
+- **SQL** (PostgreSQL)
+- **Data cleaning**: identifying and removing rows with missing values
+- **Data exploration**: row counts, unique value checks
+- **Aggregate functions**: SUM, AVG, COUNT, GROUP BY
+- **JOINs**: combining data across multiple tables (INNER JOIN)
+- **CTEs**: structuring multi-step logic with WITH clauses
+- **Window functions**: RANK() for ranking within groups
+- **Filtering & conditional logic**: WHERE, HAVING, date filtering
+
 ## Project Structure
 
 ### 1. Database Setup
@@ -271,5 +282,7 @@ This project walks through the core SQL workflow a data analyst uses day to day:
 4. Run the analysis queries to reproduce the findings.
 
 ## Author
+
+**Godwill Mandou**
 
 This project is part of my data analytics portfolio, built to practice SQL for exploratory analysis, relational querying, and business reporting.
