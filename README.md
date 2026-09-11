@@ -5,21 +5,20 @@
 **Project Title**: Retail Sales Analysis
 **Database**: `sql_project_1`
 
-
-This project uses SQL to explore, clean, and analyze a retail sales dataset. It covers setting up the database, checking the data for issues, and running a series of queries to answer business questions about revenue, profit, and customer behavior.
+This project uses SQL to explore, clean, and analyze a retail sales dataset. It covers setting up the database, checking the data for issues, and running a series of queries  including multi-table JOINs  to answer business questions about revenue, profit, customer behavior, and regional performance.
 
 ## Objectives
 
-1. **Set up the database**: create and populate a `retail_sales` table from the raw sales data.
+1. **Set up the database**: create and populate a `retail_sales` table and a `customers` table.
 2. **Clean the data**: check every column for missing values and remove incomplete records.
 3. **Explore the data**: get a basic sense of row count, unique customers, and product categories.
-4. **Answer business questions**: use SQL to pull out patterns in revenue, profit, and customer behavior.
+4. **Answer business questions**: use SQL — including JOINs, CTEs, and window functions to pull out patterns in revenue, profit, and customer behavior.
 
 ## Project Structure
 
 ### 1. Database Setup
 
-The database `sql_project_1` was created, and a `retail_sales` table was set up to hold transaction-level sales data — transaction ID, date and time of sale, customer details, product category, quantity, pricing, cost, and total sale amount.
+The database `sql_project_1` holds two tables: `retail_sales`, with transaction-level sales data (transaction ID, date and time of sale, customer details, product category, quantity, pricing, cost, and total sale amount), and `customers`, with a signup date and region per customer, used to practice relational querying.
 
 ```sql
 CREATE DATABASE sql_project_1;
@@ -36,6 +35,12 @@ CREATE TABLE retail_sales (
     price_per_unit FLOAT,
     cogs FLOAT,
     total_sale FLOAT
+);
+
+CREATE TABLE customers (
+    customer_id INT,
+    signup_date DATE,
+    region VARCHAR(10)
 );
 ```
 
@@ -81,6 +86,11 @@ GROUP BY category
 ORDER BY total_sales DESC;
 ```
 
+**Finding**
+```<img width="896" height="236" alt="image" src="https://github.com/user-attachments/assets/38775b42-8b1c-4f05-b263-3e486dd5ac11" />
+
+```
+
 **2. Which product categories generate the highest profit?**
 
 ```sql
@@ -117,17 +127,23 @@ ORDER BY total_quantity DESC;
 
 **6. What's the average sale per month, and which month performed best each year?**
 
+Written as a CTE for readability:
+
 ```sql
-SELECT year, month, avg_sale
-FROM (
+WITH monthly_avg AS (
     SELECT
         EXTRACT(YEAR FROM sale_date) AS year,
         EXTRACT(MONTH FROM sale_date) AS month,
         AVG(total_sale) AS avg_sale,
-        RANK() OVER (PARTITION BY EXTRACT(YEAR FROM sale_date) ORDER BY AVG(total_sale) DESC) AS rank
+        RANK() OVER (
+            PARTITION BY EXTRACT(YEAR FROM sale_date)
+            ORDER BY AVG(total_sale) DESC
+        ) AS rank
     FROM retail_sales
     GROUP BY 1, 2
-) AS t1
+)
+SELECT year, month, avg_sale
+FROM monthly_avg
 WHERE rank = 1;
 ```
 
@@ -167,33 +183,59 @@ WHERE category = 'Clothing'
     AND quantity >= 4;
 ```
 
+**11. What is the total revenue and customer count for each region? (JOIN)**
+
+```sql
+SELECT c.region, COUNT(DISTINCT r.customer_id) AS num_customers, SUM(r.total_sale) AS total_revenue
+FROM retail_sales r
+INNER JOIN customers c
+    ON r.customer_id = c.customer_id
+GROUP BY c.region
+ORDER BY total_revenue DESC;
+```
+
+**12. Are there any customers who have never made a purchase? (LEFT JOIN)**
+
+```sql
+SELECT c.customer_id, c.region, COALESCE(SUM(r.total_sale), 0) AS total_sales
+FROM customers c
+LEFT JOIN retail_sales r
+    ON c.customer_id = r.customer_id
+GROUP BY c.customer_id, c.region
+ORDER BY total_sales ASC
+LIMIT 10;
+```
+
 ## Findings
 
-*(Replace these with your real numbers once you run the queries in DataGrip — a couple of prompts for what to look for below.)*
+*(Replace these with your real numbers once you run the full query set.)*
 
 - **Revenue leader**: which category came out on top in query 1, and by how much compared to the next category?
 - **Profit vs. revenue**: does the highest-revenue category from query 1 match the highest-profit category from query 2 — or does margin tell a different story?
 - **Age and spend**: which age group(s) stood out in queries 4 and 5 — do the same ages that spend the most also buy the most units, or are they different groups?
 - **Seasonality**: which month(s) came out on top in query 6, and any plausible reason (holidays, promotions)?
 - **Customer concentration**: from query 7, how much of total revenue do your top 5 customers represent?
+- **Regional performance**: from query 11, which region generates the most revenue, and does it also have the most customers, or is it revenue-per-customer that stands out?
+- **Purchase coverage**: from query 12, does every customer have at least one purchase, or are there gaps worth flagging?
 
 ## Reports
 
 - **Sales summary**: total sales, average sale amount, and category-level performance.
-- **Customer insights**: top-spending customers and unique customer counts per category.
+- **Customer insights**: top-spending customers, unique customer counts per category, and regional breakdowns via JOIN.
 - **Trend analysis**: monthly sales averages and the best-performing month per year.
 
 ## Conclusion
 
-This project walks through the core SQL workflow a data analyst uses day to day: setting up a database, cleaning messy data, and translating raw transactions into answers to real business questions — which categories perform best, who the highest-value customers are, and when sales peak.
+This project walks through the core SQL workflow a data analyst uses day to day: setting up a relational database, cleaning messy data, joining across tables, and translating raw transactions into answers to real business questions — which categories perform best, who the highest-value customers are, when sales peak, and how performance varies by region.
+
 
 ## How to Use
 
 1. Clone this repository.
-2. Run the setup section of [`sql_query_p1.sql`](./sql_query_p1.sql) to create the database and `retail_sales` table.
-3. Import the sales data into the table.
+2. Run the setup section of [`sql_project_1.sql`](./sql_project_1.sql) to create the database, `retail_sales` table, and `customers` table.
+3. Import the sales data into `retail_sales` and the customer data into `customers`.
 4. Run the analysis queries to reproduce the findings.
 
 ## Author
 
-This project is part of my data analytics portfolio, built to practice SQL for exploratory analysis and business reporting.
+This project is part of my data analytics portfolio, built to practice SQL for exploratory analysis, relational querying, and business reporting.
