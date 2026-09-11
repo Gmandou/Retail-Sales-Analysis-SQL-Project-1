@@ -87,9 +87,9 @@ ORDER BY total_sales DESC;
 ```
 
 **Finding**
-```<img width="896" height="236" alt="image" src="https://github.com/user-attachments/assets/38775b42-8b1c-4f05-b263-3e486dd5ac11" />
-
-```
+<div align="left">
+  <img src="./Screenshots/Screenshot_1.png" alt="Sales by category screenshot" width="600" style="border: 1px solid #ccc; border-radius: 8px; padding: 4px;">
+</div>
 
 **2. Which product categories generate the highest profit?**
 
@@ -100,12 +100,22 @@ GROUP BY category
 ORDER BY total_profit DESC;
 ```
 
+**Finding**
+<div align="left">
+  <img src="./Screenshots/Screenshot_2.png" alt="Sales by category screenshot" width="600" style="border: 1px solid #ccc; border-radius: 8px; padding: 4px;">
+</div>
+
+
 **3. What is the average sale amount?**
 
 ```sql
 SELECT ROUND(AVG(total_sale)::numeric, 2) AS average_sale
 FROM retail_sales;
 ```
+**Finding**
+<div align="left">
+  <img src="./Screenshots/Screenshot_3.png" alt="Sales by category screenshot" width="600" style="border: 1px solid #ccc; border-radius: 8px; padding: 4px;">
+</div>
 
 **4. Which customer age groups contribute the most revenue?**
 
@@ -115,6 +125,10 @@ FROM retail_sales
 GROUP BY age
 ORDER BY total_revenue DESC;
 ```
+**Finding**
+<div align="left">
+  <img src="./Screenshots/Screenshot_4.png" alt="Sales by category screenshot" width="600" style="border: 1px solid #ccc; border-radius: 8px; padding: 4px;">
+</div>
 
 **5. Which age groups purchase the highest quantities of products?**
 
@@ -124,6 +138,10 @@ FROM retail_sales
 GROUP BY age
 ORDER BY total_quantity DESC;
 ```
+**Finding**
+<div align="left">
+  <img src="./Screenshots/Screenshot_5.png" alt="Sales by category screenshot" width="600" style="border: 1px solid #ccc; border-radius: 8px; padding: 4px;">
+</div>
 
 **6. What's the average sale per month, and which month performed best each year?**
 
@@ -146,6 +164,10 @@ SELECT year, month, avg_sale
 FROM monthly_avg
 WHERE rank = 1;
 ```
+**Finding**
+<div align="left">
+  <img src="./Screenshots/Screenshot_6.png" alt="Sales by category screenshot" width="600" style="border: 1px solid #ccc; border-radius: 8px; padding: 4px;">
+</div>
 
 **7. Who are the top 5 customers based on total sales?**
 
@@ -156,6 +178,10 @@ GROUP BY 1
 ORDER BY 2 DESC
 LIMIT 5;
 ```
+**Finding**
+<div align="left">
+  <img src="./Screenshots/Screenshot_7.png" alt="Sales by category screenshot" width="600" style="border: 1px solid #ccc; border-radius: 8px; padding: 4px;">
+</div>
 
 **8. What's the average age of customers who purchased from the 'Beauty' category?**
 
@@ -164,6 +190,10 @@ SELECT ROUND(AVG(age), 2) AS avg_age
 FROM retail_sales
 WHERE category = 'Beauty';
 ```
+**Finding**
+<div align="left">
+  <img src="./Screenshots/Screenshot_8.png" alt="Sales by category screenshot" width="600" style="border: 1px solid #ccc; border-radius: 8px; padding: 4px;">
+</div>
 
 **9. How many unique customers purchased from each category?**
 
@@ -172,6 +202,10 @@ SELECT category, COUNT(DISTINCT customer_id) AS cnt_unique_cs
 FROM retail_sales
 GROUP BY category;
 ```
+**Finding**
+<div align="left">
+  <img src="./Screenshots/Screenshot_9.png" alt="Sales by category screenshot" width="600" style="border: 1px solid #ccc; border-radius: 8px; padding: 4px;">
+</div>
 
 **10. Which 'Clothing' transactions had a quantity of 4 or more in November 2022?**
 
@@ -182,6 +216,10 @@ WHERE category = 'Clothing'
     AND TO_CHAR(sale_date, 'YYYY-MM') = '2022-11'
     AND quantity >= 4;
 ```
+**Finding**
+<div align="left">
+  <img src="./Screenshots/Screenshot_10.png" alt="Sales by category screenshot" width="600" style="border: 1px solid #ccc; border-radius: 8px; padding: 4px;">
+</div>
 
 **11. What is the total revenue and customer count for each region? (JOIN)**
 
@@ -193,6 +231,10 @@ INNER JOIN customers c
 GROUP BY c.region
 ORDER BY total_revenue DESC;
 ```
+**Finding**
+<div align="left">
+  <img src="./Screenshots/Screenshot_11.png" alt="Sales by category screenshot" width="600" style="border: 1px solid #ccc; border-radius: 8px; padding: 4px;">
+</div>
 
 **12. Are there any customers who have never made a purchase? (LEFT JOIN)**
 
@@ -206,17 +248,10 @@ ORDER BY total_sales ASC
 LIMIT 10;
 ```
 
-## Findings
-
-*(Replace these with your real numbers once you run the full query set.)*
-
-- **Revenue leader**: which category came out on top in query 1, and by how much compared to the next category?
-- **Profit vs. revenue**: does the highest-revenue category from query 1 match the highest-profit category from query 2 — or does margin tell a different story?
-- **Age and spend**: which age group(s) stood out in queries 4 and 5 — do the same ages that spend the most also buy the most units, or are they different groups?
-- **Seasonality**: which month(s) came out on top in query 6, and any plausible reason (holidays, promotions)?
-- **Customer concentration**: from query 7, how much of total revenue do your top 5 customers represent?
-- **Regional performance**: from query 11, which region generates the most revenue, and does it also have the most customers, or is it revenue-per-customer that stands out?
-- **Purchase coverage**: from query 12, does every customer have at least one purchase, or are there gaps worth flagging?
+**Finding**
+<div align="left">
+  <img src="./Screenshots/Screenshot_12.png" alt="Sales by category screenshot" width="600" style="border: 1px solid #ccc; border-radius: 8px; padding: 4px;">
+</div>
 
 ## Reports
 
