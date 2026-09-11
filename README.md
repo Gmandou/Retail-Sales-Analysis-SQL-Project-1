@@ -98,8 +98,10 @@ ORDER BY total_sales DESC;
 ```
 
 **Finding**
-<br>
-Electronics generated the highest total sales revenue.
+<br> 
+Electronics has the highest revenue (627,620), just ahead of Clothing
+(622,140) and Beauty (573,680). The top two are very close.
+
 <div align="left">
   <img src="./Screenshots/Screenshot_1.png" alt="Sales by category screenshot" width="600" style="border: 1px solid #ccc; border-radius: 8px; padding: 4px;">
 </div>
@@ -115,7 +117,8 @@ ORDER BY total_profit DESC;
 
 **Finding**
 <br>
-Clothing generated the highest profit.
+Clothing has the highest profit (493,359), barely beating Electronics
+(493,295).
 <div align="left">
   <img src="./Screenshots/Screenshot_2.png" alt="Sales by category screenshot" width="600" style="border: 1px solid #ccc; border-radius: 8px; padding: 4px;">
 </div>
@@ -185,7 +188,11 @@ SELECT year, month, avg_sale
 FROM monthly_avg
 WHERE rank = 1;
 ```
-**Finding**
+
+**Finding**  
+<br>
+July 2022 was the best month, averaging 541.34 per sale ahead of March
+(521.38) and April (486.53).
 <div align="left">
   <img src="./Screenshots/Screenshot_6.png" alt="Sales by category screenshot" width="600" style="border: 1px solid #ccc; border-radius: 8px; padding: 4px;">
 </div>
@@ -227,7 +234,10 @@ SELECT category, COUNT(DISTINCT customer_id) AS cnt_unique_cs
 FROM retail_sales
 GROUP BY category;
 ```
-**Finding**
+**Finding**  
+<br>
+Clothing had the most unique customers (149), followed by Electronics (144)
+and Beauty (141).
 <div align="left">
   <img src="./Screenshots/Screenshot_9.png" alt="Sales by category screenshot" width="600" style="border: 1px solid #ccc; border-radius: 8px; padding: 4px;">
 </div>
@@ -242,6 +252,9 @@ WHERE category = 'Clothing'
     AND quantity >= 4;
 ```
 **Finding**
+<br>
+34 transactions matched this filter, with order sizes ranging from cheap to
+expensive items.
 <div align="left">
   <img src="./Screenshots/Screenshot_10.png" alt="Sales by category screenshot" width="600" style="border: 1px solid #ccc; border-radius: 8px; padding: 4px;">
 </div>
@@ -258,7 +271,8 @@ ORDER BY total_revenue DESC;
 ```
 **Finding**
 <br>
-South total revenue = 602790. West total revenue = 489020. North total revenue = 477730. East total revenue = 253900
+South has the highest revenue (602,790), followed by West (489,020),
+North (477,730), and East (253,900).
 <div align="left">
   <img src="./Screenshots/Screenshot_11.png" alt="Sales by category screenshot" width="600" style="border: 1px solid #ccc; border-radius: 8px; padding: 4px;">
 </div>
