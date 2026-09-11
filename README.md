@@ -87,6 +87,8 @@ ORDER BY total_sales DESC;
 ```
 
 **Finding**
+<br>
+Electronics generated the highest total sales revenue.
 <div align="left">
   <img src="./Screenshots/Screenshot_1.png" alt="Sales by category screenshot" width="600" style="border: 1px solid #ccc; border-radius: 8px; padding: 4px;">
 </div>
@@ -101,6 +103,8 @@ ORDER BY total_profit DESC;
 ```
 
 **Finding**
+<br>
+Clothing generated the highest profit.
 <div align="left">
   <img src="./Screenshots/Screenshot_2.png" alt="Sales by category screenshot" width="600" style="border: 1px solid #ccc; border-radius: 8px; padding: 4px;">
 </div>
@@ -113,6 +117,8 @@ SELECT ROUND(AVG(total_sale)::numeric, 2) AS average_sale
 FROM retail_sales;
 ```
 **Finding**
+<br>
+The average sale amount is 456.54.
 <div align="left">
   <img src="./Screenshots/Screenshot_3.png" alt="Sales by category screenshot" width="600" style="border: 1px solid #ccc; border-radius: 8px; padding: 4px;">
 </div>
@@ -126,6 +132,8 @@ GROUP BY age
 ORDER BY total_revenue DESC;
 ```
 **Finding**
+<br>
+39 year olds contribute the most revenue.
 <div align="left">
   <img src="./Screenshots/Screenshot_4.png" alt="Sales by category screenshot" width="600" style="border: 1px solid #ccc; border-radius: 8px; padding: 4px;">
 </div>
@@ -139,6 +147,8 @@ GROUP BY age
 ORDER BY total_quantity DESC;
 ```
 **Finding**
+<br>
+43 year olds purchased the highest quantities of products.
 <div align="left">
   <img src="./Screenshots/Screenshot_5.png" alt="Sales by category screenshot" width="600" style="border: 1px solid #ccc; border-radius: 8px; padding: 4px;">
 </div>
@@ -179,6 +189,8 @@ ORDER BY 2 DESC
 LIMIT 5;
 ```
 **Finding**
+<br>
+Customers 3,1,5,2 and 4 are the top 5 customers on total sales.
 <div align="left">
   <img src="./Screenshots/Screenshot_7.png" alt="Sales by category screenshot" width="600" style="border: 1px solid #ccc; border-radius: 8px; padding: 4px;">
 </div>
@@ -191,6 +203,8 @@ FROM retail_sales
 WHERE category = 'Beauty';
 ```
 **Finding**
+<br>
+The average age of customers who purchased from 'beauty' category are 40 year olds.
 <div align="left">
   <img src="./Screenshots/Screenshot_8.png" alt="Sales by category screenshot" width="600" style="border: 1px solid #ccc; border-radius: 8px; padding: 4px;">
 </div>
@@ -232,32 +246,17 @@ GROUP BY c.region
 ORDER BY total_revenue DESC;
 ```
 **Finding**
+<br>
+South total revenue = 602790. West total revenue = 489020. North total revenue = 477730. East total revenue = 253900
 <div align="left">
   <img src="./Screenshots/Screenshot_11.png" alt="Sales by category screenshot" width="600" style="border: 1px solid #ccc; border-radius: 8px; padding: 4px;">
 </div>
 
-**12. Are there any customers who have never made a purchase? (LEFT JOIN)**
-
-```sql
-SELECT c.customer_id, c.region, COALESCE(SUM(r.total_sale), 0) AS total_sales
-FROM customers c
-LEFT JOIN retail_sales r
-    ON c.customer_id = r.customer_id
-GROUP BY c.customer_id, c.region
-ORDER BY total_sales ASC
-LIMIT 10;
-```
-
-**Finding**
-<div align="left">
-  <img src="./Screenshots/Screenshot_12.png" alt="Sales by category screenshot" width="600" style="border: 1px solid #ccc; border-radius: 8px; padding: 4px;">
-</div>
 
 ## Reports
 
 - **Sales summary**: total sales, average sale amount, and category-level performance.
 - **Customer insights**: top-spending customers, unique customer counts per category, and regional breakdowns via JOIN.
-- **Trend analysis**: monthly sales averages and the best-performing month per year.
 
 ## Conclusion
 
